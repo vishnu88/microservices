@@ -1,0 +1,17 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Hotel
+    username: postgres
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8084/eureka/
