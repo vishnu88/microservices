@@ -26,6 +26,11 @@ public class RatingController {
         return new ResponseEntity<List<Rating>>(ratings,HttpStatus.ACCEPTED);
    }
 
+    @GetMapping("/getRatingName")
+    ResponseEntity<String>   getRatingName(){
+        return new ResponseEntity<String>("This is static data",HttpStatus.ACCEPTED);
+    }
+
    @GetMapping("/getRatingByHotel/{hotelId}")
    ResponseEntity<List<Rating>>   getRatingByHotelId(@PathVariable String hotelId){
 

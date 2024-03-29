@@ -1,6 +1,8 @@
 package com.vishnu.hotelservice.HotelController;
 
+import com.vishnu.hotelservice.entity.Course;
 import com.vishnu.hotelservice.entity.Hotel;
+import com.vishnu.hotelservice.service.CourseService;
 import com.vishnu.hotelservice.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +17,42 @@ import java.util.List;
 public class HotelController {
     @Autowired
     HotelService hotelService;
+    @Autowired
+    CourseService courseService;
     @PostMapping
     ResponseEntity<Hotel> addHotel(@RequestBody Hotel hotel){
         hotelService.addHotel(hotel);
         return new ResponseEntity<Hotel>(hotel, HttpStatus.ACCEPTED);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/addCourse")
+    ResponseEntity<Course> addCourse(@RequestBody Course course){
+
+        courseService.addCourses(course);
+
+         return new ResponseEntity<>(course,HttpStatus.ACCEPTED);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("getAllCources")
+    ResponseEntity<List<Course>> getAllCources(){
+        List<Course> courses = courseService.getAllCourses();
+        return new ResponseEntity<List<Course>>(courses,HttpStatus.ACCEPTED);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @DeleteMapping("/deleteCourse/{id}")
+    ResponseEntity<String> deleteCourse(@PathVariable String id){
+
+        courseService.deleteCourse(id);
+
+        return new ResponseEntity<>(id,HttpStatus.ACCEPTED);
+    }
+
+
+
+
     @GetMapping("getAllHotels")
     ResponseEntity<List<Hotel>> getAllHotels(){
       List<Hotel> hotels = hotelService.getAllHotel();
