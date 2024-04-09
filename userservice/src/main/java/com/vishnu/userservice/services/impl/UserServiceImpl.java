@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
+        System.out.println("this is cashe*********");
         return userRepository.findAll();
     }
 

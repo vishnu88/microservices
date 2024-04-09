@@ -3,6 +3,7 @@ package com.sriyan.practice.controller;
 import com.sriyan.practice.model.JWTRequest;
 import com.sriyan.practice.model.JWTResponse;
 import com.sriyan.practice.security.JwtHelper;
+import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JWTResponse> login(@RequestBody JWTRequest request) {
-
+        System.out.println(Environment.getProperties().get("server.port"));
         this.doAuthenticate(request.getEmail(), request.getPassword());
 
 
@@ -47,9 +48,9 @@ public class AuthController {
 
     private void doAuthenticate(String email, String password) {
 
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
         try {
-            manager.authenticate(authentication);
+            manager.authenticate(authenticationToken);
 
 
         } catch (BadCredentialsException e) {

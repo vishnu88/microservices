@@ -5,6 +5,7 @@ import com.vishnu.hotelservice.entity.Hotel;
 import com.vishnu.hotelservice.service.CourseService;
 import com.vishnu.hotelservice.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ import java.util.List;
 @RequestMapping("/hotel")
 
 public class HotelController {
+    @Autowired
+    private ServletWebServerApplicationContext server;
     @Autowired
     HotelService hotelService;
     @Autowired
@@ -65,4 +68,9 @@ public class HotelController {
         return new ResponseEntity<Hotel>(hotel,HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("bio/{hotelId}")
+    ResponseEntity<String> getBioTestLoadBalancing(@PathVariable String hotelId){
+//        System.out.println("*********" + server.getWebServer().getPort());
+        return new ResponseEntity<String>(hotelId,HttpStatus.ACCEPTED);
+    }
 }

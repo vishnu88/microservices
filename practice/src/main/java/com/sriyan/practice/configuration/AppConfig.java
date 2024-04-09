@@ -1,6 +1,7 @@
 package com.sriyan.practice.configuration;
 
 
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 public class AppConfig {
+
 
     @Bean
     UserDetailsService getUserDetailService(){

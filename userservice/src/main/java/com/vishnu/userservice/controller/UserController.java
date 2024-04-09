@@ -32,7 +32,7 @@ public class UserController {
     RatingService ratingService;
       @PostMapping
       ResponseEntity<User> createUser(@RequestBody User user){
-       User user1 =  userService.saveUser(user);
+       userService.saveUser(user);
        return new ResponseEntity<User>(user, HttpStatus.CREATED);
       }
       @GetMapping("/getUser/{userId}")
@@ -67,7 +67,16 @@ public class UserController {
     }
 
       @GetMapping("getAllUser")
-      List<User> getAllUser(){
-        return   userService.getAllUsers();
+      List<User> getAllUser() throws InterruptedException {
+          System.out.println("This is from server 3");
+          return   userService.getAllUsers();
       }
+
+    @GetMapping("/getUserFeignBio/{userId}")
+    ResponseEntity<String> getUserHotelBioFeign(@PathVariable String userId){
+        System.out.println("**************88");
+        String st = hotelService.getHotelDescription(userId);
+        return  new ResponseEntity<String>(st,HttpStatus.ACCEPTED);
+
+    }
 }
